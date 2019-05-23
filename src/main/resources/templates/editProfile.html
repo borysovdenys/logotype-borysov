@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:form="http://www.w3.org/1999/xhtml">
+
+<head th:replace="head.html"></head>
+
+<body>
+
+<div th:include="header.html"></div>
+
+<main role="main" class="container" style="width: 40%;">
+
+    <div class="card">
+        <article class="card-body">
+
+            <h4 class="card-title text-center mb-4 mt-1" th:text="#{editProfile.title}"/>
+            <hr>
+            <form class="form-group" th:action="@{/editProfile}" th:object="${userEdit}" method="post">
+                <p th:if="${failedToUpdate}" class="text-danger" th:text="#{editProfile.failedToUpdate}" />
+                <p th:if="${successfullyChanged}" class="text-success"th:text="#{editProfile.successfullyChanged}" />
+                <div class="form-group">
+                    <label th:text="#{register.email}" />
+                    <input name="email" class="form-control" th:value="${currentUser.email}" type="email" required th:disabled="true">
+                </div>
+                <div class="form-group required">
+                    <label th:text="#{register.firstName}" class="control-label"/>
+                    <input name="firstName" class="form-control" th:value="${currentUser.firstName}" type="text" required
+                           th:placeholder="#{register.firstName.placeholder}" th:maxlength="150">
+                </div>
+                <div class="form-group required">
+                    <label th:text="#{register.lastName}" class="control-label"/>
+                    <input name="lastName" class="form-control" th:value="${currentUser.lastName}" type="text" required
+                           th:placeholder="#{register.lastName.placeholder}" th:maxlength="150">
+                </div>
+                <div class="form-group required">
+                    <label th:text="#{register.phone}" class="control-label"/>
+                    <input name="phone" class="form-control" th:value="${currentUser.phone}" type="text" required th:maxlength="150"
+                           th:placeholder="#{register.phone.placeholder}" pattern="[0-9]{10}">
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary btn-block" th:text="#{editProfile.save}"/>
+            </form>
+        </article>
+    </div>
+</main>
+<div th:include="footer.html"></div>
+</body>
+</html>

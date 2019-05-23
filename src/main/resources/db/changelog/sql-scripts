@@ -1,0 +1,18 @@
+
+
+INSERT INTO public.roles(id, name) VALUES (1, 'admin');
+INSERT INTO public.roles(id, name) VALUES (2, 'user');
+
+
+INSERT INTO public.fields(is_active, is_deleted, label, required, type)
+    VALUES (true, false, 'Email', true, 0);
+INSERT INTO public.fields(is_active, is_deleted, label, required, type)
+    VALUES (true, false, 'Full Name', true, 0);
+INSERT INTO public.fields(is_active, is_deleted, label, required, type)
+    VALUES (true, false, 'Sex', true, 2);
+INSERT INTO public.fields(is_active, is_deleted, label, required, type)
+    VALUES (true, false, '4', false, 4);
+INSERT INTO public.fields(is_active, is_deleted, label, required, type)
+    VALUES (true, false, 'Date of birth', false, 5);
+INSERT INTO public.fields(is_active, is_deleted, label, required, type)
+    VALUES (true, false, 'comment', true, 1);

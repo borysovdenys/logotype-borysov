@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="head.html"></head>
+
+<body>
+
+<div th:include="header.html"></div>
+
+<main role="main" class="container" style="width: 40%;">
+
+    <div class="card">
+        <article class="card-body">
+            <h4 class="card-title text-center mb-4 mt-1" th:text="#{header.questionnaire}"/>
+
+            <hr>
+
+            <form class="form-group" th:action="@{/submitData}" th:object="${answerWrapper}"
+                  method="post">
+                <th:block th:if="${questionnaire.size() > 0}">
+                <th:block th:each="question, stat : ${answerWrapper.answers.keySet()}">
+                    <th:block th:if="${question.type.name() == 'TEXT'}">
+                        <div class="form-group">
+                            <label class="questionnaire-label"
+                                   th:text="${question.label}"/> <span style="color: red;" th:if="${question.required}"> *</span>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="answer" id="text"  th:maxlength="150"
+                                       th:field="*{answers[__${question.id}__]}" th:required="${question.required}"/>
+                            </div>
+                        </div>
+                    </th:block>
+
+                    <th:block th:if="${question.type.name() == 'TEXTAREA'}">
+                        <div class="form-group">
+                            <label for="text" class="questionnaire-label"
+                                   th:text="${question.label}"/> <span style="color: red;" th:if="${question.required}"> *</span>
+                            <div class="col-sm-9">
+                                          <textarea class="form-control" name="label" id="textarea"
+                                                    th:field="*{answers[__${question.id}__]}"  th:maxlength="1024"
+                                                    th:required="${question.required}" th:rows="7"> </textarea>
+                            </div>
+                        </div>
+                    </th:block>
+
+                    <th:block th:if="${question.type.name() == 'RADIOBUTTON'}">
+                        <div class="form-group">
+                            <label for="text" class="questionnaire-label"
+                                   th:text="${question.label}"/> <span style="color: red;" th:if="${question.required}"> *</span>
+                            <div class="col-sm-9">
+                                <th:block th:each="option : ${question.options}">
+                                    <input type="radio" th:name="${'option['+ question.id + ']'}"
+                                           th:text="' ' + ${option.description}" th:value="${option.description}"
+                                           th:required="${question.required}"
+                                           th:field="*{answers[__${question.id}__]}"/>
+                                    <br>
+                                </th:block>
+                            </div>
+                        </div>
+                    </th:block>
+
+                    <th:block th:if="${question.type.name() == 'CHECKBOX'}">
+
+                        <div class="form-group">
+                            <label for="text" class="questionnaire-label"
+                                   th:text="${question.label}"/> <span style="color: red;" th:if="${question.required}"> *</span>
+
+                            <div class="col-sm-9">
+                                <input type="checkbox" th:required="${question.required}" th:value="true"
+                                       th:field="*{answers[__${question.id}__]}">
+                            </div>
+                        </div>
+                    </th:block>
+
+                    <th:block th:if="${question.type.name() == 'COMBOBOX'}">
+                        <div class="form-group">
+                            <label for="text" class="questionnaire-label"
+                                   th:text="${question.label}"/> <span style="color: red;" th:if="${question.required}"> *</span>
+                            <div class="col-sm-9">
+                                <select class="form-control" th:required="${question.required}"   th:field="*{answers[__${question.id}__]}">
+                                    <option th:each="option : ${question.options}" th:value="${option.description}"
+                                            th:text="${option.description}" th:required="${question.required}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </th:block>
+
+                    <th:block th:if="${question.type.name() == 'DATE'}">
+                        <div class="form-group">
+                            <label for="text" class="questionnaire-label"
+                                   th:text="${question.label}"/> <span style="color: red;" th:if="${question.required}"> *</span>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" name="dateDebut"
+                                       th:field="*{answers[__${question.id}__]}" th:required="${question.required}"/>
+                            </div>
+                        </div>
+                    </th:block>
+
+                </th:block>
+                <br/>
+                <button type="submit" class="btn btn-primary btn-block" th:text="#{editProfile.save}"/>
+                </th:block>
+                <th:block th:unless="${questionnaire.size() > 0}">
+                    <h4 class="card-title text-center mb-4 mt-1" th:text="#{questionnaire.isEmpty}"/>
+                </th:block>
+            </form>
+
+        </article>
+    </div>
+
+</main>
+<div th:include="footer.html"></div>
+</body>
+</html>

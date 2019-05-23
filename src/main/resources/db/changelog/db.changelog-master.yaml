@@ -1,0 +1,73 @@
+#https://stackoverflow.com/questions/50944077/setting-up-spring-boot-project-with-liquibase?
+
+#databaseChangeLog:
+#- preConditions:
+#  - runningAs:
+#      username: postgres
+#- changeSet:
+#  id: 1
+#  author: Denys
+#  changes:
+#  - insert:
+#      tableName: roles
+#      schemaName: db
+#      columns:
+#        column:
+#          name: id
+#          value: 1
+#
+##      - column:
+##          name: name
+##          value: User
+
+#
+#databaseChangeLog:
+#- changeSet:
+#    id: 1
+#    author: Denys
+#    changes:
+#    - createTable:
+#        columns:
+#        - column:
+#            constraints:
+#              nullable: false
+#            name: status
+#            type: INT
+#        - column:
+#            constraints:
+#              nullable: false
+#            name: token
+#            type: VARCHAR(255)
+#        tableName: iiiiiii
+
+
+#databaseChangeLog:
+#- changeSet:
+#  id: 2
+#  author: Denys
+#  changes:
+#  - insert:
+#      tableName: simple
+#      columns:
+#       - column:
+#          name: status
+#          valueNumeric: 1
+#       - column:
+#            name: token
+#            value: "User"
+
+
+#databaseChangeLog:
+#- changeSet:
+#  id: 11
+#  author: Denys
+#  changes:
+#  - insert:
+#      tableName: roles
+#      columns:
+#      - column:
+#          name: id
+#          value: "1"
+#      - column:
+#          name: name
+#          value: "User"

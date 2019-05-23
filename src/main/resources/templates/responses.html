@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="head.html"></head>
+
+<body>
+
+<div th:include="header.html"></div>
+
+<main role="main" class="container" style="max-width: 80%;">
+
+    <div class="card">
+        <article class="card-body">
+
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <h4 class="card-title" th:text="#{header.responses}"/>
+                </div>
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <th th:nowrap="true" th:each="field: ${fields}" th:text="${field.label}"/>
+                    </thead>
+                    <tbody>
+                    <tr th:each="line: ${page}">
+                        <td th:each="column: ${line}" th:text="${column}"/>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination-div text-center">
+                <th:block th:if="${page.totalElements > 10}">
+                <span th:if="${page.hasPrevious()}">
+                    <a th:href="@{/responses(page=${page.number-1},size=${page.size})}" th:text="#{pagging.previous}"/>
+               </span>
+                    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                        <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+                        <span th:unless="${page.number == i}">
+                       <a th:href="@{/responses(page=${i},size=${page.size})}">[[${i}+1]]</a>
+                    </span>
+                    </th:block>
+                    <span th:if="${page.hasNext()}">
+                    <a th:href="@{/responses(page=${page.number+1},size=${page.size})}" th:text="#{pagging.next}"/>
+                 </span>
+                </th:block>
+            </div>
+        </article>
+    </div>
+
+</main>
+<div th:include="footer.html"></div>
+</body>
+</html>

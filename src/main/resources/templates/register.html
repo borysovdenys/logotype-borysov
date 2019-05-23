@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:form="http://www.w3.org/1999/xhtml">
+
+<head th:replace="head.html"></head>
+
+<body>
+
+<div th:include="header.html"></div>
+
+<main role="main" class="container" style="width: 40%;">
+
+    <div class="card">
+        <article class="card-body">
+
+            <h4 class="card-title text-center mb-4 mt-1" th:text="#{login-form.signUp}"/>
+            <hr>
+            <form class="form-group" th:action="@{/register}" th:object="${user}" method="post">
+                <p th:if="${emailUsedError}" class="text-danger" th:text="#{register.emailError}"/>
+                <p th:if="${passwordError}" class="text-danger" th:text="#{register.passwordError}"/>
+                <p th:if="${validationError}" class="text-danger" th:text="#{register.validationError}"/>
+                <div class="form-group required">
+                    <label th:text="#{register.email}" class="control-label"/>
+                    <input name="email" class="form-control" th:placeholder="#{register.email.placeholder}"
+                           type="email" required th:maxlength="150" th:value="${user.email}">
+                </div>
+                <div class="form-group required">
+                    <label th:text="#{register.password}" class="control-label"/>
+                    <input name="password" class="form-control" th:placeholder="#{register.password.placeholder}" type="password"
+                           th:maxlength="150" required th:minlength="8" th:value="${user.password}">
+                </div>
+                <div class="form-group required">
+                    <label th:text="#{register.confirmPassword}" class="control-label"/>
+                    <input name="retypePassword" class="form-control" th:placeholder="#{register.password.placeholder}"
+                           type="password" required th:maxlength="150" th:minlength="8" th:value="${user.retypePassword}">
+                </div>
+                <div class="form-group required">
+                    <label th:text="#{register.firstName}" class="control-label"/>
+                    <input name="firstName" class="form-control" th:placeholder="#{register.firstName.placeholder}" type="text"
+                           required th:maxlength="150" th:value="${user.firstName}">
+                </div>
+                <div class="form-group required">
+                    <label th:text="#{register.lastName}" class="control-label"/>
+                    <input name="lastName" class="form-control" th:placeholder="#{register.lastName.placeholder}" type="text"
+                           required th:maxlength="150" th:value="${user.lastName}">
+                </div>
+                <div class="form-group required">
+                    <label th:text="#{register.phone}" class="control-label"/>
+                    <input name="phone" class="form-control" th:placeholder="#{register.phone.placeholder}" type="text"
+                           required th:maxlength="150" pattern="[0-9]{10}" th:value="${user.phone}">
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary btn-block" th:text="#{login-form.signUp}"/>
+                <br/>
+                <div class="form-inline justify-content-center">
+                    <span th:text="#{register.alreadyHaveAccount}" style="margin-right: 30px;"/>
+                    <a th:href="@{/login}" class="btn" th:text="#{login-form.login}"/>
+                </div>
+            </form>
+        </article>
+    </div>
+</main>
+<div th:include="footer.html"></div>
+</body>
+</html>

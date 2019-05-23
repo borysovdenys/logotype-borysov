@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="head.html"></head>
+
+<body>
+
+<div th:include="header.html"></div>
+
+<main role="main" class="container" style="width: 40%;">
+
+    <div class="card">
+        <article class="card-body">
+            <h4 class="card-title text-center mb-4 mt-1" th:text="#{title}"/>
+            <hr>
+            <p th:if="${loginError}" class="text-danger" th:text="#{login-form.error}"/>
+            <p th:if="${successfullyRegistered}" class="text-success" th:text="#{login-form.successfullyRegistered}"/>
+            <p th:if="${successfullySent}" class="text-success" th:text="#{forgotPassword.successfullySent}"/>
+            <form class="form-group" th:action="@{/login}" method="post">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <input name="username" class="form-control" th:placeholder="#{login-form.email}" type="text" th:maxlength="150">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input name="password" class="form-control" placeholder="******" type="password" id="password">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                           <i class="fa fa-eye" id="showPass"></i>
+                       </span>
+                    </div>
+
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="remember" name="remember-me">
+                    <label class="custom-control-label" for="remember" th:text="#{login-form.rememberMe}"/>
+                </div>
+
+                <p class="text-center"><a th:href="@{/forgotPassword}" class="btn"
+                                          th:text="#{login-form.forgotPassword}"></a>
+                </p>
+                <button type="submit" class="btn btn-primary btn-block" th:text="#{login-form.login}"/>
+                <br/>
+                <div class="form-inline justify-content-center">
+                    <span th:text="#{login-form.dontHaveAccount}" style="margin-right: 30px;"/>
+                    <a th:href="@{/register}" class="btn" th:text="#{login-form.signUp}"/>
+                </div>
+            </form>
+        </article>
+    </div>
+
+</main>
+<div th:include="footer.html"></div>
+</body>
+</html>

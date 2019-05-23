@@ -1,0 +1,43 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script th:inline="javascript">
+    var isInlineEdit = "[[${takenField} != null ? true:false]]";
+    if (isInlineEdit) {
+        $('#myModal').modal('show');
+        var optionBlock = document.querySelector('.dependent');
+        optionBlock.style.display = ((document.getElementById('selectType').value) == 'RADIOBUTTON'
+        || (document.getElementById('selectType').value) == 'COMBOBOX' ? 'block' : 'none');
+
+    }
+</script>
+<script th:inline="javascript">
+    var isInlineEdit = "[[${deleteField} != null ? true:false]]";
+    if (isInlineEdit) {
+        $('#deleteModal').modal('show');
+    }
+</script>
+<script>
+    document.getElementById('selectType').onchange = function () {
+        var optionBlock = document.querySelector('.dependent');
+        optionBlock.style.display = ((this.value) == 'RADIOBUTTON' || (this.value) == 'COMBOBOX' ? 'block' : 'none');
+    };
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != '') {
+                window.location.replace('?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $( "#showPass" )
+        .mouseup(function() {
+            $("#password").attr('type','password');
+        })
+        .mousedown(function() {
+            $("#password").attr('type','text');
+        });
+</script>
