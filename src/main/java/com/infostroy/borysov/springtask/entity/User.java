@@ -35,6 +35,12 @@ public class User {
     @ManyToOne
     private Role role;
 
+    private String picture;
+
+    private String locale;
+
+    private Boolean authorizedWithGoogle = false;
+
     public User() {
     }
 

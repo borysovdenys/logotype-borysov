@@ -19,7 +19,7 @@
             <p th:if="${loginError}" class="text-danger" th:text="#{login-form.error}"/>
             <p th:if="${successfullyRegistered}" class="text-success" th:text="#{login-form.successfullyRegistered}"/>
             <p th:if="${successfullySent}" class="text-success" th:text="#{forgotPassword.successfullySent}"/>
-            <form class="form-group" th:action="@{/login}" method="post">
+            <form class="form-group" th:action="@{/index}" method="post">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -43,13 +43,14 @@
                     <label class="custom-control-label" for="remember" th:text="#{login-form.rememberMe}"/>
                 </div>
 
-                <p class="text-center"><a th:href="@{/forgotPassword}" class="btn"
-                                          th:text="#{login-form.forgotPassword}"></a>
-                </p>
-                <button type="submit" class="btn btn-primary btn-block" th:text="#{login-form.login}"/>
-                <br/>
+                <center>
+                <button type="submit" class="btn btn-primary " style="width:49%" th:text="#{login-form.signin}"/>
+                <a href="home" class="btn btn-social btn-google" role="button" aria-pressed="true"
+                   style="width:49%"><i class="fab fa-google"></i> <output  th:text="#{login-form.signinWithGoogle}"/></a>
+                </center>
                 <div class="form-inline justify-content-center">
-                    <span th:text="#{login-form.dontHaveAccount}" style="margin-right: 30px;"/>
+                    <a th:href="@{/forgotPassword}" class="btn" style="margin-right: 200px;"
+                                              th:text="#{login-form.forgotPassword}"></a>
                     <a th:href="@{/register}" class="btn" th:text="#{login-form.signUp}"/>
                 </div>
             </form>

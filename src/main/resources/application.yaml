@@ -20,11 +20,20 @@ spring:
     mail:
       host: smtp.gmail.com
       port: 587
-      username: d.borysov@infostroy.com.ua
-      password: firstpostNINJA11
+      username: borysov.power@gmail.com
+      password: borysov.power11
       properties.mail.smtp:
         auth: true
         starttls.enable: true
+
+security.oauth2.client.clientId: 974794402732-qbto8iigipp6knkd2gq8eackj9ps0efj.apps.googleusercontent.com
+security.oauth2.client.clientSecret: 3PuaIOnys9Xdw-waUjBdkqKJ
+security.oauth2.client.accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+security.oauth2.client.userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+security.oauth2.client.clientAuthenticationScheme: form
+security.oauth2.client.scope: openid,email,profile
+security.oauth2.resource.userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+security.oauth2.resource.preferTokenInfo: true
 
 
 

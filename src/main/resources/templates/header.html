@@ -38,7 +38,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item"th:href="@{/editProfile}" th:text="#{header.editProfile}"/>
-                    <a class="dropdown-item" th:href="@{/changePassword}" th:text="#{header.changePassword}"/>
+                    <a th:if="!${session.authorizedWithGoogle}" class="dropdown-item" th:href="@{/changePassword}" th:text="#{header.changePassword}"/>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" th:href="@{/logout}" th:text="#{header.logout}"/>
                 </div>
