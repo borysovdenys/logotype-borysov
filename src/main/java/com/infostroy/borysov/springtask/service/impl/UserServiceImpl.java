@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email).orElse(new User());
     }
 
     @Override
@@ -101,6 +101,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean userWithSameEmailExists(String email) {
-        return findUserByEmail(email) != null;
+        return findUserByEmail(email).getId() != null;
     }
 }
